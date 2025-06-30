@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Website Resmi Baby Volcano - Gerabagan</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2a5c45;
+      --secondary: #e3b04b;
+      --light: #f8f9fa;
+      --dark: #343a40;
+      --success: #28a745;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      line-height: 1.6;
+      background-color: #f5f5f5;
+    }
+    
+    /* Header Styles */
+    .top-bar {
+      background-color: var(--primary);
+      color: white;
+      padding: 8px 0;
+      font-size: 14px;
+    }
+    
+    .container {
+      width: 140%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    .flex-between {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .top-bar a {
+      color: white;
+      text-decoration: none;
+      margin-left: 15px;
+      transition: all 0.3s;
+    }
+    
+    .top-bar a:hover {
+      color: var(--secondary);
+    }
+    
+    .header-main {
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 15px 0;
+    }
+    
+    .logo-area {
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo {
+      height: 60px;
+      margin-right: 15px;
+    }
+    
+    .logo-area h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+    
+    .logo-area p {
+      font-size: 14px;
+      color: #666;
+    }
+    
+    .main-nav {
+      display: flex;
+    }
+    
+    .main-nav a {
+      color: var(--dark);
+      text-decoration: none;
+      padding: 8px 15px;
+      margin: 0 5px;
+      font-weight: 500;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+    
+    .main-nav a:hover, .main-nav a.active {
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    /* Hero Section */
+    .hero-section {
+      position: relative;
+      height: 500px;
+      overflow: hidden;
+    }
+    
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .hero-text {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+      color: white;
+      padding: 30px;
+    }
+    
+    .hero-text h2 {
+      font-size: 36px;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+    
+    .hero-text p {
+      font-size: 18px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+    
+    /* Quick Menu */
+    .quick-menu {
+      background-color: var(--primary);
+      padding: 15px 0;
+      margin-top: -40px;
+      position: relative;
+      z-index: 10;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .quick-menu-container {
+      display: flex;
+      justify-content: space-around;
+    }
+    
+    .quick-menu-item {
+      color: white;
+      text-align: center;
+      padding: 15px;
+      transition: all 0.3s;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+    
+    .quick-menu-item:hover {
+      background-color: rgba(255,255,255,0.2);
+      transform: translateY(-3px);
+    }
+    
+    .quick-menu-item i {
+      font-size: 24px;
+      display: block;
+      margin-bottom: 10px;
+    }
+    
+    /* Content Sections */
+    .section {
+      padding: 60px 0;
+      background-color: white;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    
+    .section-title h2 {
+      font-size: 32px;
+      color: var(--primary);
+      display: inline-block;
+      padding-bottom: 10px;
+    }
+    
+    .section-title h2:after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 3px;
+      background-color: var(--secondary);
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    /* About Section */
+    .about-content {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+    
+    .about-text {
+      flex: 1;
+    }
+    
+    .about-img {
+      flex: 1;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .about-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    /* Gallery Section */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      height: 200px;
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    
+    /* Map Section */
+    .map-container {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      height: 400px;
+    }
+    
+    /* News Section */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .news-card {
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+    }
+    
+    .news-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .news-img {
+      height: 200px;
+      overflow: hidden;
+    }
+    
+    .news-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .news-content {
+      padding: 20px;
+    }
+    
+    .news-date {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+    
+    .news-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+    
+    .news-excerpt {
+      color: #666;
+      margin-bottom: 15px;
+    }
+    
+    .read-more {
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    /* Contact Form */
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    textarea.form-control {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+    
+    .btn:hover {
+      background-color: #1e4a36;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: var(--primary);
+      color: white;
+      padding: 30px 0;
+      text-align: center;
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    
+    .footer-links a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+    }
+    
+    .footer-links a:hover {
+      color: var(--secondary);
+    }
+    
+    .social-icons {
+      margin-bottom: 20px;
+    }
+    
+    .social-icons a {
+      color: white;
+      font-size: 20px;
+      margin: 0 10px;
+      transition: all 0.3s;
+    }
+    
+    .social-icons a:hover {
+      color: var(--secondary);
+      transform: translateY(-3px);
+    }
+    
+    .copyright {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+      .about-content {
+        flex-direction: column;
+      }
+      
+      .hero-text h2 {
+        font-size: 28px;
+      }
+      
+      .quick-menu-container {
+        flex-wrap: wrap;
+      }
+      
+      .quick-menu-item {
+        width: 50%;
+        margin-bottom: 10px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .header-main {
+        flex-direction: column;
+      }
+      
+      .main-nav {
+        margin-top: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .main-nav a {
+        margin: 5px;
+        padding: 8px 12px;
+      }
+      
+      .hero-section {
+        height: 400px;
+      }
+      
+      .hero-text h2 {
+        font-size: 24px;
+      }
+      
+      .hero-text p {
+        font-size: 16px;
+      }
+      
+      .section {
+        padding: 40px 0;
+      }
+      
+      .section-title h2 {
+        font-size: 28px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .quick-menu-item {
+        width: 100%;
+      }
+      
+      .news-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="top-bar">
+    <div class="container flex-between">
+      <div class="date">Minggu, 29 Juni 2025</div>
+      <div class="menu-kanan">
+        <a href="#"><i class="fas fa-user"></i> E-Mandiri</a>
+        <a href="#"><i class="fas fa-sign-in-alt"></i> Login</a>
+      </div>
+    </div>
+  </div>
+  <div class="header-main container flex-between">
+    <div class="logo-area">
+      <img src="assets/logo.png" alt="Logo Baby Volcano" class="logo">
+      <div>
+        <h1>Baby Volcano</h1>
+        <p>Desa Gerabagan, Kecamatan Kradenan, Kabupaten Grobogan</p>
+      </div>
+    </div>
+    <nav class="main-nav">
+      <a href="#home" class="active"><i class="fas fa-home"></i> Beranda</a>
+      <a href="#profil"><i class="fas fa-info-circle"></i> Profil</a>
+      <a href="#galeri"><i class="fas fa-camera"></i> Galeri</a>
+      <a href="#peta"><i class="fas fa-map-marked-alt"></i> Peta</a>
+      <a href="#berita"><i class="fas fa-newspaper"></i> Berita</a>
+      <a href="#kontak"><i class="fas fa-envelope"></i> Kontak</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero-section" id="home">
+  <img src="assets/banner.jpg" alt="Banner Baby Volcano" class="hero-img">
+  <div class="hero-text">
+    <h2></h2>
+    <p></p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="quick-menu">
+    <div class="quick-menu-container">
+      <div class="quick-menu-item">
+        <i class="fas fa-info-circle"></i>
+        <span>Tentang Kami</span>
+      </div>
+      <div class="quick-menu-item">
+        <i class="fas fa-images"></i>
+        <span>Galeri Foto</span>
+      </div>
+      <div class="quick-menu-item">
+        <i class="fas fa-map-marked-alt"></i>
+        <span>Peta Lokasi</span>
+      </div>
+      <div class="quick-menu-item">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Event</span>
+      </div>
+      <div class="quick-menu-item">
+        <i class="fas fa-phone-alt"></i>
+        <span>Hubungi Kami</span>
+      </div>
+    </div>
+  </div>
+</div>
+<main>
+  <!-- About Section -->
+<section class="section" id="profil">
+  <div class="container">
+    <div class="section-title">
+      <h2>Tentang Baby Volcano</h2>
+    </div>
+    <div class="about-content">
+      <div class="about-text">
+        <div class="image-stack">
+          <img src="assets/about-top.jpg" alt="Semburan lumpur Baby Volcano" class="stacked-image top-image">
+        </div>
+        
+        <p class="highlight-text">Baby Volcano adalah fenomena alam unik berupa semburan lumpur panas yang muncul dari perut bumi di Desa Gerabagan, Kecamatan Kradenan, Kabupaten Grobogan. Keunikan dari Baby Volcano adalah kandungan garam alami yang membuat air yang muncul terasa asin, berbeda dengan semburan lumpur pada umumnya.</p>
+        
+        <p>Fenomena ini pertama kali muncul pada tahun 2018 dan sejak itu menjadi daya tarik wisata yang unik di Jawa Tengah. Baby Volcano menawarkan pengalaman geowisata yang edukatif sekaligus menyenangkan bagi pengunjung dari berbagai usia.</p>
+        
+        <div class="image-stack">
+          <img src="assets/about-bottom.jpg" alt="Pengunjung di Baby Volcano" class="stacked-image bottom-image">
+        </div>
+        
+        <p class="highlight-text">Pemerintah Desa Gerabagan bersama masyarakat setempat terus mengembangkan kawasan ini sebagai destinasi wisata berkelanjutan yang ramah lingkungan dan memberikan manfaat ekonomi bagi warga sekitar.</p>
+      <p>Fenomena ini pertama kali muncul pada tahun 2018 dan sejak itu menjadi daya tarik wisata yang unik di Jawa Tengah. Baby Volcano menawarkan pengalaman geowisata yang edukatif sekaligus menyenangkan bagi pengunjung dari berbagai usia.</p>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* About Section Layout */
+  .about-content {
+    display: flex;
+    justify-content: center;
+  }
+
+  .about-text {
+    max-width: 800px;
+    text-align: justify;
+  }
+
+  /* Image Stack Styles */
+  .image-stack {
+    margin: 2rem 0;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+
+  .stacked-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .top-image {
+    aspect-ratio: 16/9;
+    object-fit: cover;
+  }
+
+  .bottom-image {
+    aspect-ratio: 4/3;
+    object-fit: cover;
+  }
+
+  .image-stack:hover .stacked-image {
+    transform: scale(1.03);
+  }
+
+  /* Text Styling */
+  .about-text p {
+    margin: 1.5rem 0;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #3a3a3a;
+  }
+
+  .highlight-text {
+    color: var(--primary);
+    font-weight: 500;
+    position: relative;
+    padding-left: 1.5rem;
+  }
+
+  .highlight-text::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--primary), var(--secondary));
+    border-radius: 4px;
+  }
+
+  .accent-text {
+    color: var(--secondary);
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 992px) {
+    .about-text {
+      padding: 0 1rem;
+    }
+    
+    .image-stack {
+      margin: 1.5rem 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .about-text p {
+      font-size: 1rem;
+    }
+    
+    .top-image {
+      aspect-ratio: 3/2;
+    }
+    
+    .bottom-image {
+      aspect-ratio: 3/2;
+    }
+  }
+</style>
+  <!-- Gallery Section -->
+  <section class="section bg-light" id="galeri">
+    <div class="container">
+      <div class="section-title">
+        <h2>Galeri Foto</h2>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="assets/volcano1.jpg" alt="Baby Volcano 1">
+        </div>
+        <div class="gallery-item">
+          <img src="assets/volcano2.jpg" alt="Baby Volcano 2">
+        </div>
+        <div class="gallery-item">
+          <img src="assets/volcano3.jpg" alt="Baby Volcano 3">
+        </div>
+        <div class="gallery-item">
+          <img src="assets/activity1.jpg" alt="Aktivitas Wisata">
+        </div>
+        <div class="gallery-item">
+          <img src="assets/activity2.jpg" alt="Pengunjung">
+        </div>
+        <div class="gallery-item">
+          <img src="assets/nature.jpg" alt="Alam Sekitar">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map Section -->
+  <section class="section" id="peta">
+    <div class="container">
+      <div class="section-title">
+        <h2>Peta Lokasi</h2>
+      </div>
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31680.23412605916!2d111.12345678901234!3d-6.987654321098765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwNTknMTUuNiJTIDExMcKwMDcnNDEuNiJF!5e0!3m2!1sen!2sid!4v1620000000000!5m2!1sen!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- News Section -->
+  <section class="section bg-light" id="berita">
+    <div class="container">
+      <div class="section-title">
+        <h2>Berita & Artikel</h2>
+      </div>
+      <div class="news-grid">
+        <div class="news-card">
+          <div class="news-img">
+            <img src="assets/news1.jpg" alt="Berita 1">
+          </div>
+          <div class="news-content">
+            <div class="news-date">15 Juni 2025</div>
+            <h3 class="news-title">Festival Baby Volcano 2025 Sukses Digelar</h3>
+            <p class="news-excerpt">Festival tahunan Baby Volcano kembali digelar dengan meriah, menarik ribuan pengunjung dari berbagai daerah...</p>
+            <a href="#" class="read-more">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-img">
+            <img src="assets/news2.jpg" alt="Berita 2">
+          </div>
+          <div class="news-content">
+            <div class="news-date">2 Juni 2025</div>
+            <h3 class="news-title">Penelitian Terbaru Tentang Kandungan Mineral Baby Volcano</h3>
+            <p class="news-excerpt">Tim peneliti dari Universitas Gadjah Mada menemukan kandungan mineral unik dalam lumpur Baby Volcano yang...</p>
+            <a href="#" class="read-more">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-img">
+            <img src="assets/news3.jpg" alt="Berita 3">
+          </div>
+          <div class="news-content">
+            <div class="news-date">20 Mei 2025</div>
+            <h3 class="news-title">Peningkatan Fasilitas Wisata Baby Volcano</h3>
+            <p class="news-excerpt">Pemerintah Kabupaten Grobogan mengalokasikan dana untuk peningkatan fasilitas wisata di kawasan Baby Volcano...</p>
+            <a href="#" class="read-more">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section" id="kontak">
+    <div class="container">
+      <div class="section-title">
+        <h2>Hubungi Kami</h2>
+      </div>
+      <div class="contact-form">
+        <form>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Nama Lengkap" required>
+          </div>
+          <div class="form-group">
+            <input type="email" class="form-control" placeholder="Alamat Email" required>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Subjek">
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" placeholder="Pesan Anda" required></textarea>
+          </div>
+          <button type="submit" class="btn">Kirim Pesan</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-links">
+      <a href="#home">Beranda</a>
+      <a href="#profil">Profil</a>
+      <a href="#galeri">Galeri</a>
+      <a href="#peta">Peta</a>
+      <a href="#berita">Berita</a>
+      <a href="#kontak">Kontak</a>
+    </div>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2025 Baby Volcano Gerabagan. Seluruh Hak Cipta Dilindungi.</p>
+      <p>Desa Gerabagan, Kecamatan Kradenan, Kabupaten Grobogan, Jawa Tengah</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
