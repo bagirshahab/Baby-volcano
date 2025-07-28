@@ -37,8 +37,8 @@
     }
     
     .container {
-      width: 140%;
-      max-width: 1200px;
+      width: 100%; /* Changed to 100% */
+      max-width: 1100px; /* Slightly reduced max-width for better centering */
       margin: 0 auto;
       padding: 0 15px;
     }
@@ -117,7 +117,7 @@
     .hero-img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: cover; /* Pastikan gambar mengisi area dengan presisi */
     }
     
     .hero-text {
@@ -223,11 +223,17 @@
       border-radius: 8px;
       overflow: hidden;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      /* Tambahan untuk About Image agar presisi dan tidak terpotong */
+      height: 350px; /* Atur tinggi kontainer gambar */
+      display: flex; /* Gunakan flexbox untuk pusatkan gambar */
+      align-items: center; /* Pusatkan vertikal */
+      justify-content: center; /* Pusatkan horizontal */
     }
     
     .about-img img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover; /* Kunci: Memastikan gambar mengisi area, memotong jika perlu, tanpa distorsi */
       display: block;
     }
     
@@ -243,13 +249,16 @@
       overflow: hidden;
       border-radius: 8px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-      height: 200px;
+      height: 250px; /* Menambah tinggi untuk galeri agar foto lebih besar */
+      display: flex; /* Gunakan flexbox untuk pusatkan gambar */
+      align-items: center; /* Pusatkan vertikal */
+      justify-content: center; /* Pusatkan horizontal */
     }
     
     .gallery-item img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: cover; /* Kunci: Memastikan gambar memenuhi area, memotong jika perlu, tanpa distorsi */
       transition: transform 0.5s;
     }
     
@@ -267,9 +276,11 @@
     
     /* News Section */
     .news-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px; /* Increased gap */
+      justify-content: center; 
+      transition: all 0.3s ease;
     }
     
     .news-card {
@@ -278,26 +289,53 @@
       overflow: hidden;
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
       transition: all 0.3s;
+      flex: 1 1 300px; /* Default sizing for grid */
+      display: flex; /* Make news card a flex container */
+      flex-direction: column; /* Stack image and content vertically */
     }
     
-    .news-card:hover {
+    .news-card:hover:not(.expanded) {
       transform: translateY(-5px);
       box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     }
+
+    .news-card.expanded {
+        flex: 1 1 100%; 
+        max-width: 800px; /* Limit width of expanded article */
+        margin: 0 auto; /* Center expanded article */
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        z-index: 10; 
+        position: relative;
+        padding-bottom: 20px; /* Add padding for expanded article */
+    }
     
     .news-img {
-      height: 200px;
+      height: 280px; /* **Menambah tinggi agar foto berita lebih besar dan jelas** */
       overflow: hidden;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      display: flex; /* Gunakan flexbox untuk penempatan gambar yang presisi */
+      align-items: center; /* Pusatkan gambar secara vertikal jika perlu */
+      justify-content: center; /* Pusatkan gambar secara horizontal jika perlu */
     }
     
     .news-img img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: cover; /* **Kunci utama untuk presisi:** Memastikan gambar mengisi area tanpa terdistorsi, memotong jika perlu. */
+      display: block;
+      transition: transform 0.3s ease-in-out; /* Transisi untuk efek hover */
+    }
+
+    .news-card:hover .news-img img {
+      transform: scale(1.05); /* Sedikit zoom saat hover untuk menarik perhatian */
     }
     
     .news-content {
-      padding: 20px;
+      padding: 20px; /* Increased padding */
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1; /* Allows content to take available space */
     }
     
     .news-date {
@@ -310,17 +348,37 @@
       font-size: 18px;
       margin-bottom: 10px;
       color: var(--primary);
+      line-height: 1.4;
     }
     
     .news-excerpt {
       color: #666;
       margin-bottom: 15px;
+      text-align: justify;
+      text-indent: 2em;
+      flex-grow: 1; /* Allows excerpt to take space */
+    }
+
+    .news-excerpt .more-text {
+        display: none; 
     }
     
     .read-more {
       color: var(--secondary);
       text-decoration: none;
-      font-weight: 500;
+      font-weight: 600; /* Made slightly bolder */
+      cursor: pointer;
+      align-self: flex-start; /* Align button to start */
+      margin-top: auto; /* Push to bottom */
+      padding: 5px 10px;
+      border: 1px solid var(--secondary);
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .read-more:hover {
+        background-color: var(--secondary);
+        color: white;
     }
     
     /* Contact Form */
@@ -429,6 +487,20 @@
         width: 50%;
         margin-bottom: 10px;
       }
+
+      .news-card {
+        flex: 1 1 45%; /* Adjust for 2 columns on medium screens */
+      }
+
+      .about-img {
+        height: 250px; /* Responsive height for about image */
+      }
+      .gallery-item {
+        height: 200px; /* Responsive height for gallery items */
+      }
+      .news-img {
+        height: 220px; /* Responsive height for news images */
+      }
     }
     
     @media (max-width: 768px) {
@@ -466,6 +538,24 @@
       .section-title h2 {
         font-size: 28px;
       }
+
+      .news-card {
+        flex: 1 1 100%; /* Full width on small screens */
+      }
+
+      .news-card.expanded {
+        max-width: 95%; /* Adjust max-width for smaller screens */
+      }
+
+      .about-img {
+        height: 200px; /* Further responsive height for about image */
+      }
+      .gallery-item {
+        height: 180px; /* Further responsive height for gallery items */
+      }
+      .news-img {
+        height: 180px; /* Further responsive height for news images */
+      }
     }
     
     @media (max-width: 576px) {
@@ -475,6 +565,113 @@
       
       .news-grid {
         grid-template-columns: 1fr;
+      }
+
+      .about-img {
+        height: 150px; /* Smallest responsive height for about image */
+      }
+      .gallery-item {
+        height: 150px; /* Smallest responsive height for gallery items */
+      }
+      .news-img {
+        height: 150px; /* Smallest responsive height for news images */
+      }
+    }
+
+    /* About Section Layout */
+    .about-content {
+      display: flex;
+      justify-content: center;
+    }
+
+    .about-text {
+      max-width: 800px;
+      text-align: justify;
+    }
+
+    /* Image Stack Styles */
+    .image-stack {
+      margin: 2rem 0;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .stacked-image {
+      width: 100%;
+      height: 300px; /* Meningkatkan tinggi default */
+      object-fit: cover; /* Pastikan gambar mengisi tanpa distorsi */
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    /* You can adjust these aspect ratios if your specific images look better with different ratios */
+    .top-image {
+      /* aspect-ratio: 16/9; */
+    }
+
+    .bottom-image {
+      /* aspect-ratio: 4/3; */
+    }
+
+    .image-stack:hover .stacked-image {
+      transform: scale(1.03);
+    }
+
+    /* Text Styling */
+    .about-text p {
+      margin: 1.5rem 0;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #3a3a3a;
+    }
+
+    .highlight-text {
+      color: var(--primary);
+      font-weight: 500;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .highlight-text::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background: linear-gradient(to bottom, var(--primary), var(--secondary));
+      border-radius: 4px;
+    }
+
+    .accent-text {
+      color: var(--secondary);
+      font-weight: 500;
+      font-style: italic;
+    }
+
+    /* Responsive Design for Image Stack */
+    @media (max-width: 992px) {
+      .about-text {
+        padding: 0 1rem;
+      }
+      
+      .image-stack {
+        margin: 1.5rem 0;
+      }
+      .stacked-image {
+        height: 250px; /* Responsive height */
+      }
+    }
+
+    @media (max-width: 768px) {
+      .about-text p {
+        font-size: 1rem;
+      }
+      
+      .stacked-image {
+        height: 200px; /* Further responsive height */
       }
     }
   </style>
@@ -544,8 +741,7 @@
   </div>
 </div>
 <main>
-  <!-- About Section -->
-<section class="section" id="profil">
+  <section class="section" id="profil">
   <div class="container">
     <div class="section-title">
       <h2>Tentang Baby Volcano</h2>
@@ -553,7 +749,7 @@
     <div class="about-content">
       <div class="about-text">
         <div class="image-stack">
-          <img src="assets/about-top.jpg" alt="Semburan lumpur Baby Volcano" class="stacked-image top-image">
+          <img src="assets/about-bottom.jpg" alt="Semburan lumpur Baby Volcano" class="stacked-image top-image">
         </div>
         
         <p class="highlight-text">Baby Volcano adalah fenomena alam unik berupa semburan lumpur panas yang muncul dari perut bumi di Desa Gerabagan, Kecamatan Kradenan, Kabupaten Grobogan. Keunikan dari Baby Volcano adalah kandungan garam alami yang membuat air yang muncul terasa asin, berbeda dengan semburan lumpur pada umumnya.</p>
@@ -561,7 +757,7 @@
         <p>Fenomena ini pertama kali muncul pada tahun 2018 dan sejak itu menjadi daya tarik wisata yang unik di Jawa Tengah. Baby Volcano menawarkan pengalaman geowisata yang edukatif sekaligus menyenangkan bagi pengunjung dari berbagai usia.</p>
         
         <div class="image-stack">
-          <img src="assets/about-bottom.jpg" alt="Pengunjung di Baby Volcano" class="stacked-image bottom-image">
+          <img src="assets/about-top.jpg" alt="Pengunjung di Baby Volcano" class="stacked-image bottom-image">
         </div>
         
         <p class="highlight-text">Pemerintah Desa Gerabagan bersama masyarakat setempat terus mengembangkan kawasan ini sebagai destinasi wisata berkelanjutan yang ramah lingkungan dan memberikan manfaat ekonomi bagi warga sekitar.</p>
@@ -572,106 +768,6 @@
   </div>
 </section>
 
-<style>
-  /* About Section Layout */
-  .about-content {
-    display: flex;
-    justify-content: center;
-  }
-
-  .about-text {
-    max-width: 800px;
-    text-align: justify;
-  }
-
-  /* Image Stack Styles */
-  .image-stack {
-    margin: 2rem 0;
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  }
-
-  .stacked-image {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.5s ease;
-  }
-
-  .top-image {
-    aspect-ratio: 16/9;
-    object-fit: cover;
-  }
-
-  .bottom-image {
-    aspect-ratio: 4/3;
-    object-fit: cover;
-  }
-
-  .image-stack:hover .stacked-image {
-    transform: scale(1.03);
-  }
-
-  /* Text Styling */
-  .about-text p {
-    margin: 1.5rem 0;
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #3a3a3a;
-  }
-
-  .highlight-text {
-    color: var(--primary);
-    font-weight: 500;
-    position: relative;
-    padding-left: 1.5rem;
-  }
-
-  .highlight-text::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 4px;
-    background: linear-gradient(to bottom, var(--primary), var(--secondary));
-    border-radius: 4px;
-  }
-
-  .accent-text {
-    color: var(--secondary);
-    font-weight: 500;
-    font-style: italic;
-  }
-
-  /* Responsive Design */
-  @media (max-width: 992px) {
-    .about-text {
-      padding: 0 1rem;
-    }
-    
-    .image-stack {
-      margin: 1.5rem 0;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .about-text p {
-      font-size: 1rem;
-    }
-    
-    .top-image {
-      aspect-ratio: 3/2;
-    }
-    
-    .bottom-image {
-      aspect-ratio: 3/2;
-    }
-  }
-</style>
-  <!-- Gallery Section -->
   <section class="section bg-light" id="galeri">
     <div class="container">
       <div class="section-title">
@@ -700,7 +796,6 @@
     </div>
   </section>
 
-  <!-- Map Section -->
   <section class="section" id="peta">
     <div class="container">
       <div class="section-title">
@@ -712,15 +807,13 @@
     </div>
   </section>
 
-  <!-- News Section -->
-<section class="section bg-light" id="berita">
+  <section class="section bg-light" id="berita">
   <div class="container">
     <div class="section-title">
       <h2>Berita & Artikel</h2>
     </div>
     <div class="news-grid">
 
-      <!-- Berita 1 -->
       <div class="news-card">
         <div class="news-img">
           <img src="assets/news1.jpg" alt="Berita 1">
@@ -728,25 +821,20 @@
         <div class="news-content">
           <div class="news-date">15 Juni 2025</div>
           <h3 class="news-title">Pembuatan Tunnel Garam di Baby Volcano: Kolaborasi Tim KKNT IPB dan Petani Garam Lokal</h3>
-          <p class="news-excerpt" style="text-align: justify; text-indent: 2em;">
+          <p class="news-excerpt">
             Dalam rangka mendukung pengembangan wisata lokal dan pemanfaatan potensi sumber daya alam berupa garam...
-            <span class="more-text" style="display: none;">
+            <span class="more-text">
               di Desa Grabagan, Tim Kuliah Kerja Nyata Tematik (KKNT) Inovasi IPB University bersama seorang petani garam setempat, Pak Jupri, melaksanakan kegiatan pembangunan tunnel garam di kawasan Baby Volcano, Desa Grabagan, Kecamatan Kradenan, Kabupaten Grobogan.
               <br><br>
-              <span style="text-indent: 2em; display: inline-block;">
               Tunnel garam merupakan wadah yang menampung air bittern dan garam, dilapisi dengan alas geomembran yang membentuk seperti kolam. Kemudian tunnel garam tersebut dibuatkan atap seperti lorong dengan rangka bambu dan plastik UV yang kemudian dipasang menyelimuti rangka tersebut. Air bittern merupakan air sisa kristalisasi yang sudah banyak mengandung garam. Air bittern ini mengandung tinggi mineral yang memiliki banyak manfaat untuk kesehatan.
-              </span>
               <br><br>
-              <span style="text-indent: 2em; display: inline-block;">
               Dua bahan utama yaitu air bittern dan garam untuk terapi diambil langsung dari semburan lumpur Baby Volcano. Kegiatan pembuatan tunnel berlangsung selama empat hari dari tanggal 14-18 Juli 2025. Kegiatan dimulai pukul 09.00 hingga 17.00 WIB setiap harinya. Tunnel garam dibangun untuk mendukung pengembangan terapi garam sebagai salah satu daya tarik Wisata Baby Volcano. Terapi garam ini dapat digunakan layaknya sauna yang bermanfaat untuk membantu regenerasi sel kulit, serta manfaat kesehatan lainnya.
-              </span>
             </span>
           </p>
           <a href="javascript:void(0);" class="read-more" onclick="showOnlyThisArticle(this)">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
 
-      <!-- Berita 2 -->
       <div class="news-card">
         <div class="news-img">
           <img src="assets/news2.jpg" alt="Berita 2">
@@ -754,9 +842,9 @@
         <div class="news-content">
           <div class="news-date">2 Juni 2025</div>
           <h3 class="news-title">Penelitian Terbaru Tentang Kandungan Mineral Baby Volcano</h3>
-          <p class="news-excerpt" style="text-align: justify; text-indent: 2em;">
+          <p class="news-excerpt">
             Tim peneliti dari Universitas Gadjah Mada menemukan kandungan mineral unik dalam lumpur Baby Volcano yang...
-            <span class="more-text" style="display: none;">
+            <span class="more-text">
               Penelitian ini menunjukkan bahwa lumpur mengandung magnesium, sulfur, dan unsur mikro lainnya yang berpotensi digunakan dalam bidang kesehatan dan kosmetik. Kandungan ini membuka peluang pengembangan wisata terapi berbasis alam.
             </span>
           </p>
@@ -764,7 +852,6 @@
         </div>
       </div>
 
-      <!-- Berita 3 -->
       <div class="news-card">
         <div class="news-img">
           <img src="assets/news3.jpg" alt="Berita 3">
@@ -772,9 +859,9 @@
         <div class="news-content">
           <div class="news-date">20 Mei 2025</div>
           <h3 class="news-title">Peningkatan Fasilitas Wisata Baby Volcano</h3>
-          <p class="news-excerpt" style="text-align: justify; text-indent: 2em;">
+          <p class="news-excerpt">
             Pemerintah Kabupaten Grobogan mengalokasikan dana untuk peningkatan fasilitas wisata di kawasan Baby Volcano...
-            <span class="more-text" style="display: none;">
+            <span class="more-text">
               Fasilitas yang akan dibangun termasuk jalan akses, gazebo, tempat parkir, dan papan informasi digital. Peningkatan ini diharapkan dapat menarik lebih banyak wisatawan lokal maupun mancanegara.
             </span>
           </p>
@@ -787,7 +874,6 @@
 </section>
 
 
-<!-- JavaScript -->
 <script>
   function showOnlyThisArticle(button) {
     const allCards = document.querySelectorAll('.news-card');
@@ -798,27 +884,44 @@
     if (!isExpanded) {
       // Expand this article
       allCards.forEach(card => {
-        if (card !== thisCard) card.style.display = 'none';
-        else card.classList.add('expanded');
+        if (card !== thisCard) {
+            card.style.display = 'none'; // Hide other cards
+        } else {
+            card.classList.add('expanded'); // Add expanded class to this card
+            // Set max-height for expanded image to prevent it from being too large
+            const expandedImg = card.querySelector('.news-img');
+            if (expandedImg) {
+                expandedImg.style.height = 'auto'; // Remove fixed height
+                expandedImg.style.maxHeight = '450px'; // Set a max height for clarity
+            }
+        }
       });
-      moreText.style.display = 'inline';
-      button.innerHTML = 'Tutup Artikel <i class="fas fa-arrow-up"></i>';
+      moreText.style.display = 'inline'; // Show more text
+      button.innerHTML = 'Tutup Artikel <i class="fas fa-arrow-up"></i>'; // Change button text
+      // Scroll to the expanded article for better UX
+      thisCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
     } else {
       // Show all articles
       allCards.forEach(card => {
-        card.style.display = 'block';
-        card.classList.remove('expanded');
+        card.style.display = 'flex'; // Show all cards (flex because of news-card flex property)
+        card.classList.remove('expanded'); // Remove expanded class
         const span = card.querySelector('.more-text');
-        if (span) span.style.display = 'none';
+        if (span) span.style.display = 'none'; // Hide more text
         const btn = card.querySelector('.read-more');
-        if (btn) btn.innerHTML = 'Baca Selengkapnya <i class="fas fa-arrow-right"></i>';
+        if (btn) btn.innerHTML = 'Baca Selengkapnya <i class="fas fa-arrow-right"></i>'; // Reset button text
+        // Reset image height for collapsed cards
+        const img = card.querySelector('.news-img');
+        if (img) {
+            img.style.height = '280px'; // Reset to default news card image height
+            img.style.maxHeight = 'none';
+        }
       });
     }
   }
 </script>
 
 
-  <!-- Contact Section -->
   <section class="section" id="kontak">
     <div class="container">
       <div class="section-title">
@@ -862,7 +965,7 @@
       <a href="#"><i class="fab fa-twitter"></i></a>
     </div>
     <div class="copyright">
-      <p>&copy; 2025 Baby Volcano Gerabagan. Seluruh Hak Cipta Dilindungi.</p>
+      <p>© 2025 Baby Volcano Gerabagan. Seluruh Hak Cipta Dilindungi.</p>
       <p>Desa Gerabagan, Kecamatan Kradenan, Kabupaten Grobogan, Jawa Tengah</p>
     </div>
   </div>
